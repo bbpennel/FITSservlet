@@ -15,6 +15,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.version>2.17.1</log4j.version>
+		<slf4j.version>1.7.36</slf4j.version>
 	</properties>
 	
 	<build>
@@ -58,7 +60,7 @@
         	-->
             <groupId>edu.harvard.huit.lts</groupId>
             <artifactId>fits</artifactId>
-            <version>1.5.0</version>
+            <version>1.7.2-wisc-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 		<dependency>
@@ -98,9 +100,19 @@
 			<version>2.6</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 		<!--
 			The following are necessary beginning with JDK 11 (or OpenJDK 11)

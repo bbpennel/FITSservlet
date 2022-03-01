@@ -31,9 +31,9 @@ public class LoggingConfigurator implements ServletContextListener {
 
 	/*
 	 * This is the System property that the Log4j framework will use to configure its properties.
-	 * It should reference a log4j.properties file.
+	 * It should reference a log4j2 config file.
 	 */
-	private static final String LOG4J_SYSTEM_PROPERTY = "log4j.configuration";
+	private static final String LOG4J_SYSTEM_PROPERTY = "log4j2.configurationFile";
 
 	/**
 	 * Configure the Log4j logging framework on application initialization.
@@ -72,19 +72,19 @@ public class LoggingConfigurator implements ServletContextListener {
                 }
             } catch (URISyntaxException e) {
                 // fall back to default file from WAR -- must first clear System property for this to work
-                System.err.println("Unable to load log4j.properties file: " + log4jSystemProp + " -- reason: " + e.getReason());
-                System.err.println("Falling back to default log4j.properties file from within WAR file.");
+                System.err.println("Unable to load log4j config file: " + log4jSystemProp + " -- reason: " + e.getReason());
+                System.err.println("Falling back to default log4j2.xml file from within WAR file.");
                 System.clearProperty(LOG4J_SYSTEM_PROPERTY);
                 useFallback = true;
             }
         } else {
-        	System.err.println("No system property for [" + LOG4J_SYSTEM_PROPERTY + "] -- using default log4j.properties within WAR file");
+        	System.err.println("No system property for [" + LOG4J_SYSTEM_PROPERTY + "] -- using default log4j2.xml within WAR file");
         	useFallback = true;
         }
         
         if (useFallback) {
         	try {
-				URL propFileURL = ctx.getServletContext().getResource("/WEB-INF/classes/log4j.properties");
+				URL propFileURL = ctx.getServletContext().getResource("/WEB-INF/classes/log4j2.xml");
 				log4jUri = propFileURL.toURI();
                 System.setProperty( LOG4J_SYSTEM_PROPERTY, log4jUri.toString());
             	System.err.println("Look for log4j properties file in WAR here: " + log4jUri.toString());

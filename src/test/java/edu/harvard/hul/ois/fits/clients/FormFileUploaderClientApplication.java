@@ -28,7 +28,8 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This program is a test client to upload files to a web server using HTTP POST.
@@ -47,12 +48,12 @@ public class FormFileUploaderClientApplication {
         System.out.println(LOG4J_PROPERTIES_FILE + " -- File exists: " + log4jProperties.exists());
         if (log4jProperties.exists()) {
         	URI log4jUri = log4jProperties.toURI();
-        	System.setProperty("log4j.configuration", log4jUri.toString());
+        	System.setProperty("log4j2.configurationFile", log4jUri.toString());
         }
-        String log4jProp = System.getProperty("log4j.configuration");
-        System.out.println("log4j.configuration: " + log4jProp);
-        // else should set log4j properties file from environment variable either in Eclipse of command line with -Dlog4j.configuration=<some location>
-        logger = Logger.getLogger(FormFileUploaderClientApplication.class);
+        String log4jProp = System.getProperty("log4j2.configurationFile");
+        System.out.println("log4j2.configurationFile: " + log4jProp);
+        // else should set log4j properties file from environment variable either in Eclipse of command line with -Dlog4j2.configurationFile=<some location>
+		logger = LoggerFactory.getLogger(FormFileUploaderClientApplication.class);
     }
 
 	/**
